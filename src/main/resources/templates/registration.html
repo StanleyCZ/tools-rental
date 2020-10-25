@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="cs"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{shared/layout-front}"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrace</title>
+</head>
+<body>
+    <section layout:fragment="content" id="register-page">
+
+        <h1 class="h2">Registrace</h1>
+        <form th:action="@{/register}" th:object="${user}" method="POST" >
+            <div>
+                <label>Jméno</label>
+                <input th:field="*{firstName}" required/>
+                <p th:each="error: ${#fields.errors('firstName')}"
+                   th:text="${error}">Validation error</p>
+            </div>
+            <div>
+                <label>Přijmení</label>
+                <input th:field="*{lastName}" required/>
+                <p th:each="error : ${#fields.errors('lastName')}"
+                   th:text="${error}">Validation error</p>
+            </div>
+            <div>
+                <label>Email</label>
+                <input type="email" th:field="*{email}" required/>
+                <p th:each="error : ${#fields.errors('email')}"
+                   th:text="${error}">Validation error</p>
+            </div>
+            <div>
+                <label>Heslo</label>
+                <input type="password" th:field="*{password}" required/>
+                <p th:each="error : ${#fields.errors('password')}"
+                   th:text="${error}">Validation error</p>
+            </div>
+            <div>
+                <label>Znovu heslo</label>
+                <input type="password" th:field="*{confirmPassword}" required/>
+            </div>
+            <button type="submit" class="btn btn-primary">Vytvořit účet</button>
+            <p>Máte vytvořený účet? <a th:href="@{/login}">Přihlašte se</a>.</p>
+        </form>
+
+    </section>
+</body>
+</html>

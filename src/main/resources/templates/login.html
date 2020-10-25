@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="cs"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{shared/layout-front}">
+      layout:decorate="~{shared/layout-front}"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Přihlášení</title>
@@ -9,7 +10,21 @@
 <body>
 <section layout:fragment="content" class="text-center">
 
-    <h1>Přihlášení...</h1>
+    <h1>Přihlášení</h1>
+    <form th:action="@{/login}" method="post">
+        <div>
+            <label>Email</label>
+            <input type="email" name="username" placeholder="Zadejte email" required/>
+        </div>
+        <div>
+            <label>Heslo</label>
+            <input type="password" name="password"  placeholder="Zadejte heslo" required/>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Přihlásit</button>
+
+        <p>Nemáte účet? <a th:href="@{/register}">Registrujte se</a></p>
+    </form>
 
 </section>
 

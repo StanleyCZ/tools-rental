@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="cs"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="UTF-8">
     <title>Test layout page</title>
@@ -24,16 +25,13 @@
                     <li class="nav-item"><a class="nav-link" href="#">Domů</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Zahrada</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Stavba</a></li>
-                    <li class="nav-item"><span class="nav-link">|</span></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Košík</a></li>
+                    <li sec:authorize="isAuthenticated()"><a class="nav-link btn btn-sm btn-outline-info" th:href="@{/logout}">Odhlásit</a></li>
+                    <li sec:authorize="isAnonymous()"><a class="nav-link btn btn-sm btn-outline-info" th:href="@{/login}">Přihlásit</a></li>
                 </ul>
             </div>
         </nav>
     </header>
 
-    <div class="p-0 m-0">
-        <img th:src="@{/img/front-banner_master.jpg}" class="img-fluid">
-    </div>
     <main class="container my-3 p-2 bg-white border-info">
         <section layout:fragment="content">
 

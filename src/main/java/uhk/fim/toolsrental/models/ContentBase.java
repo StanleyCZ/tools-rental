@@ -2,14 +2,18 @@ package uhk.fim.toolsrental.models;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.UUID;
 
 @MappedSuperclass
 public abstract class ContentBase {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Long id;
+
+    @NotNull
     private Date creationDate;
     private Date lastUpdate;
 
@@ -21,12 +25,11 @@ public abstract class ContentBase {
         this.lastUpdate = lastUpdate;
     }
 
-    @Id
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(final Long id) {
         this.id = id;
     }
 

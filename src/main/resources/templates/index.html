@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{shared/layout-front}" lang="cs">
+      layout:decorate="~{shared/layout-front}" lang="cs"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <title>Půjčovna nářadí</title>
 
@@ -8,6 +9,7 @@
 <body>
 <section layout:fragment="content" class="text-center">
     <h1>Vítejte v půjčovně</h1>
+    <p>Ahoj <span sec:authentication="name">uzivateli</span></p>
     <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Integer tempor. Quisque tincidunt scelerisque libero. Quisque porta. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce suscipit libero eget elit. In enim a arcu imperdiet malesuada. Praesent vitae arcu tempor neque lacinia pretium. Nullam at arcu a est sollicitudin euismod. Aenean placerat. </p>
 </section>
 </body>
