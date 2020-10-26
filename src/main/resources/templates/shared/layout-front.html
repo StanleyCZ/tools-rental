@@ -14,7 +14,7 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body class="bg-light">
-    <header class="container-fluid bg-white">
+    <header class="container-fluid bg-white border-bottom">
         <nav class="container navbar navbar-expand-md bg-white">
             <a class="navbar-brand" href="/">Půjčovna nástrojů</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNav">
@@ -34,26 +34,31 @@
         </nav>
     </header>
 
-    <main class="container my-3 px-2  bg-white border-info">
-        <section id="category-nav" class="d-flex flex-row mx-n2" style="height:60px">
-            <div class="d-flex col bg-danger align-items-center">
-                <a href="#" class="text-white">Stavba</a>
+    <main class="container my-3">
+        <section id="category-nav" class="d-flex flex-row" style="height:60px">
+            <div class="d-flex col bg-white align-items-center border shadow-sm mr-3">
+                <a href="#">Stavba</a>
             </div>
-            <div class="d-flex col bg-success align-items-center">
-                <a href="#" class="text-white">Nářadí</a>
+            <div class="d-flex col bg-white align-items-center border shadow-sm mr-3">
+                <a href="#" >Nářadí</a>
             </div>
-            <div class="d-flex col bg-primary align-items-center">
-                <a href="#" class="text-white">Zahrada</a>
+            <div class="d-flex col bg-white align-items-center border shadow-sm">
+                <a href="#">Zahrada</a>
             </div>
         </section>
+        <div class="my-2" id="navbread" layout:fragment="navbread">
+            <p><a th:href="@{/}">Půjčovna nástrojů</a> > Sekce > Podsekce</p>
+        </div>
+        <div class="bg-white p-3">
         <section layout:fragment="content">
 
         </section>
+        </div>
     </main>
 
-    <footer class="container-fluid bg-dark">
-        <div class="container bg-danger">
-            <p>Footer webu</p>
+    <footer class="footer bg-white border-top">
+        <div class="container text-center">
+            <p class="py-4 text-muted">Projekt PPRO 2020 &copy; Stanislav Máša, Michal Hvězda</p>
         </div>
     </footer>
 

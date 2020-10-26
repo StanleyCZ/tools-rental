@@ -42,8 +42,7 @@ public class MembershipController {
     @PostMapping("/register")
     public String registerUserAccount(
                     @ModelAttribute("user") @Valid RegistrationDto regDto,
-                    BindingResult res,
-                    RedirectAttributes ras){
+                    BindingResult res){
 
         if(res.hasErrors()){
             return "registration";
