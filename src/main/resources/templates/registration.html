@@ -11,6 +11,7 @@
     <section layout:fragment="content" id="register-page">
 
         <h1 class="h2">Registrace</h1>
+
         <form th:action="@{/register}" th:object="${user}" method="POST" >
             <div>
                 <label>Jméno</label>

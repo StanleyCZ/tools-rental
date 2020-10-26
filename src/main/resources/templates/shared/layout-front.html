@@ -9,30 +9,43 @@
 
     <!-- Add Bootstrap styles -->
     <link rel="stylesheet" th:href="@{/css/lib/bootstrap.min.css}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet" type="text/css" />
     <!-- Add custom styles -->
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body class="bg-light">
     <header class="container-fluid bg-white">
         <nav class="container navbar navbar-expand-md bg-white">
-            <a class="navbar-brand" href="#">Půjčovna nástrojů</a>
+            <a class="navbar-brand" href="/">Půjčovna nástrojů</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="mainNav">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a class="nav-link" href="#">Domů</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Zahrada</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Stavba</a></li>
-                    <li sec:authorize="isAuthenticated()"><a class="nav-link btn btn-sm btn-outline-info" th:href="@{/logout}">Odhlásit</a></li>
-                    <li sec:authorize="isAnonymous()"><a class="nav-link btn btn-sm btn-outline-info" th:href="@{/login}">Přihlásit</a></li>
+                    <li sec:authorize="isAnonymous()"><a class="nav-link" th:href="@{/login}">Přihlášení</a></li>
+                    <li sec:authorize="isAuthenticated()"><a class="nav-link" th:href="@{/logout}">Odhlásit</a></li>
+                    <li class="nav-item border-left pl-2">
+                        <a class="nav-link btn btn-sm btn-outline-info" href="#"><i class="fas fa-shopping-cart mr-2"></i>Košík</a>
+                    </li>
+
                 </ul>
             </div>
         </nav>
     </header>
 
-    <main class="container my-3 p-2 bg-white border-info">
+    <main class="container my-3 px-2  bg-white border-info">
+        <section id="category-nav" class="d-flex flex-row mx-n2" style="height:60px">
+            <div class="d-flex col bg-danger align-items-center">
+                <a href="#" class="text-white">Stavba</a>
+            </div>
+            <div class="d-flex col bg-success align-items-center">
+                <a href="#" class="text-white">Nářadí</a>
+            </div>
+            <div class="d-flex col bg-primary align-items-center">
+                <a href="#" class="text-white">Zahrada</a>
+            </div>
+        </section>
         <section layout:fragment="content">
 
         </section>
