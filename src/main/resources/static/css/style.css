@@ -1,0 +1,12 @@
+#stavba-category-box{
+    background: #898989;
+}
+#naradi-category-box{
+    background: #b04f4f;
+}
+#zahrada-category-box{
+    background: green;
+}
+.category-box a{
+    color: white;
+}
