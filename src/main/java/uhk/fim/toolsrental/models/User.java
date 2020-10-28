@@ -21,7 +21,8 @@ public class User extends ContentBase {
     @JoinTable(
             name = "UserRoles",
             joinColumns = @JoinColumn(name = "UserId", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "RoleId", referencedColumnName = "id") )
+            inverseJoinColumns = @JoinColumn(name = "RoleId", referencedColumnName = "id")
+    )
     private Collection<Role> roles;
 
     @Size(min = 6)
@@ -31,14 +32,22 @@ public class User extends ContentBase {
     public User(){
 
     }
-    public User(String firstName, String lastName, String email,@Size(min = 6) @NotBlank String password, String phone, Collection<Role> roles) {
+
+    public Collection<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Collection<Role> roles) {
+        this.roles = roles;
+    }
+
+    public User(String firstName, String lastName, String email, @Size(min = 6) @NotBlank String password, String phone, Collection<Role> roles) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.phone = phone;
         this.roles = roles;
-
     }
 
     public String getFirstName() {
@@ -81,12 +90,5 @@ public class User extends ContentBase {
         this.phone = phone;
     }
 
-    public Collection<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Collection<Role> roles) {
-        this.roles = roles;
-    }
 
 }

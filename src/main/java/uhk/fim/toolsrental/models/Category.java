@@ -1,24 +1,20 @@
 package uhk.fim.toolsrental.models;
 
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
-import java.util.Set;
 
 @Entity
-public class Role extends ContentBase {
-
+public class Category extends MyContentBase{
     @NotBlank
     private String name;
+
     private String description;
 
-   // @OneToMany(mappedBy = "role")
-   // Set<UserRoles> roles;
-
-    public Role(){
+    public Category(){
 
     }
-    public Role(String name){
+
+    public Category(@NotBlank String name) {
         this.name = name;
     }
 
