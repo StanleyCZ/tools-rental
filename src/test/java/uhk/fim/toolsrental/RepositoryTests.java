@@ -55,7 +55,7 @@ public class RepositoryTests {
         adminDto.setFirstName("Vašík");
         adminDto.setLastName("Pašík");
         adminDto.setEmail("admin@email.cz");
-        adminDto.setPassword("admin123");
+        adminDto.setPassword("aaaaaa");
         adminDto.setRole(Role.getADMIN());
         userService.registerNewUser(adminDto);
 
@@ -63,7 +63,7 @@ public class RepositoryTests {
         emplDto.setFirstName("Hugo");
         emplDto.setLastName("Vyhňoucal");
         emplDto.setEmail("empl@email.cz");
-        emplDto.setPassword("empl123");
+        emplDto.setPassword("aaaaaa");
         emplDto.setRole(Role.getZAMESTNANEC());
         userService.registerNewUser(emplDto);
 
@@ -71,7 +71,7 @@ public class RepositoryTests {
         userDto.setFirstName("Venca");
         userDto.setLastName("Vemtočert");
         userDto.setEmail("user@email.cz");
-        userDto.setPassword("user123");
+        userDto.setPassword("aaaaaa");
         userDto.setRole(Role.getZAKAZNIK());
         userService.registerNewUser(userDto);
 
