@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import uhk.fim.toolsrental.models.Role;
 import uhk.fim.toolsrental.models.User;
 import uhk.fim.toolsrental.models.dto.RegistrationDto;
+import uhk.fim.toolsrental.repos.RoleRepository;
 import uhk.fim.toolsrental.repos.UserRepository;
 
 import java.util.Arrays;
@@ -24,6 +25,8 @@ public class UserService implements IUserService {
     private BCryptPasswordEncoder pwdEncoder;
     private UserRepository userRepo;
 
+    @Autowired
+    private RoleRepository roleRepo;
 
     public UserService(UserRepository userRepo){
         super();
@@ -32,12 +35,14 @@ public class UserService implements IUserService {
 
     @Override
     public User registerNewUser(RegistrationDto registrationDto) {
+
         User user = new User(
                 registrationDto.getFirstName(),
                 registrationDto.getLastName(),
                 registrationDto.getEmail(),
                 pwdEncoder.encode(registrationDto.getPassword()),
-                registrationDto.getPhoneNumber(), Arrays.asList(new Role(registrationDto.getRole())));
+                registrationDto.getPhoneNumber(),
+                Arrays.asList(roleRepo.findByName(Role.getZAKAZNIK())));
 
         return userRepo.save(user);
     }

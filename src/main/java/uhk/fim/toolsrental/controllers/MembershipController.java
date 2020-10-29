@@ -12,6 +12,8 @@ import uhk.fim.toolsrental.models.dto.RegistrationDto;
 import uhk.fim.toolsrental.services.UserService;
 
 import javax.validation.Valid;
+import java.util.HashMap;
+import java.util.Map;
 
 
 @Controller
@@ -42,14 +44,16 @@ public class MembershipController {
     @PostMapping("/register")
     public String registerUserAccount(
                     @ModelAttribute("user") @Valid RegistrationDto regDto,
-                    BindingResult res){
+                    BindingResult res,
+                    RedirectAttributes attrs){
 
         if(res.hasErrors()){
             return "registration";
         }
         userService.registerNewUser(regDto);
+        attrs.addFlashAttribute("registrationSuccess","Registrace proběhla v pořádku, můžete se přihlásit");
 
-        return "redirect:/index";
+        return "redirect:/login";
 
     }
 
