@@ -12,9 +12,6 @@ public class Role extends ContentBase {
     private String name;
     private String description;
 
-   // @OneToMany(mappedBy = "role")
-   // Set<UserRoles> roles;
-
     public Role(){
 
     }

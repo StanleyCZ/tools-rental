@@ -1,10 +1,14 @@
 package uhk.fim.toolsrental.models;
 
 
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
-import java.util.UUID;
+
 
 @MappedSuperclass
 public abstract class ContentBase {
@@ -13,16 +17,16 @@ public abstract class ContentBase {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
-    private Date creationDate;
-    private Date lastUpdate;
+    private Date createdDate;
 
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
+    private Date lastUpdateDate;
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
     }
 
-    public void setLastUpdate(Date lastUpdate) {
-        this.lastUpdate = lastUpdate;
+    public void setLastUpdateDate(Date lastUpdateDate) {
+        this.lastUpdateDate = lastUpdateDate;
     }
 
     public Long getId() {
@@ -36,18 +40,18 @@ public abstract class ContentBase {
 
     @PrePersist
     protected void onCreate(){
-        creationDate = new Date();
+        createdDate = new Date();
     }
     @PreUpdate
     protected void onUpdate(){
-        lastUpdate = new Date();
+        lastUpdateDate = new Date();
     }
 
-    public Date getCreationDate() {
-        return creationDate;
+    public Date getCreatedDate() {
+        return createdDate;
     }
-    public Date getLastUpdate() {
-        return lastUpdate;
+    public Date getLastUpdateDate() {
+        return lastUpdateDate;
     }
 
 }

@@ -8,7 +8,7 @@ import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
 @Entity
-public class Borrowing extends MyContentBase {
+public class Borrowing extends ContentBase {
     @NotBlank
     private Date sinceDate;
 

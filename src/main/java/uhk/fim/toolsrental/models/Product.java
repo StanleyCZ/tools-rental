@@ -1,25 +1,23 @@
 package uhk.fim.toolsrental.models;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 @Entity
-public class Product extends MyContentBase {
+public class Product extends ContentBase {
     @NotBlank
     private Float cost;
 
     private String picture;
     private String description;
-    @NotBlank
-    private int maxPieces;
-    private int availeblePieces;
 
     @NotBlank
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "idCategory",referencedColumnName = "id")
+    private int totalAmount;
+    private int freeAmount;
+
+    @NotBlank
+    @ManyToOne
+    @JoinColumn(name = "idCategory",referencedColumnName = "id", nullable = false)
     private Category category;
 
     public Float getCost() {
@@ -46,20 +44,20 @@ public class Product extends MyContentBase {
         this.description = description;
     }
 
-    public int getMaxPieces() {
-        return maxPieces;
+    public int getTotalAmount() {
+        return totalAmount;
     }
 
-    public void setMaxPieces(int maxPieces) {
-        this.maxPieces = maxPieces;
+    public void setTotalAmount(int maxPieces) {
+        this.totalAmount = maxPieces;
     }
 
-    public int getAvaileblePieces() {
-        return availeblePieces;
+    public int getFreeAmount() {
+        return freeAmount;
     }
 
-    public void setAvaileblePieces(int availeblePieces) {
-        this.availeblePieces = availeblePieces;
+    public void setFreeAmount(int availeblePieces) {
+        this.freeAmount = availeblePieces;
     }
 
     public Category getCategory() {
@@ -73,8 +71,8 @@ public class Product extends MyContentBase {
     public Product() {
     }
 
-    public Product(@NotBlank Float cost, @NotBlank int maxPieces) {
+    public Product(@NotBlank String name, @NotBlank Float cost, @NotBlank int totalAmount) {
         this.cost = cost;
-        this.maxPieces = maxPieces;
+        this.totalAmount = totalAmount;
     }
 }

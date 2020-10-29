@@ -42,6 +42,8 @@ public class UserService implements IUserService {
         return userRepo.save(user);
     }
 
+
+
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
 
@@ -50,9 +52,15 @@ public class UserService implements IUserService {
         if(dbUser == null)
             throw new UsernameNotFoundException("User with given email does not exists");
 
-        return new org.springframework.security.core.userdetails.User(dbUser.getEmail(),dbUser.getPassword(),mapRolesToAuthorities(dbUser.getRoles()));
+        org.springframework.security.core.userdetails.User u = new org.springframework.security.core.userdetails.User(
+                dbUser.getEmail(),
+                dbUser.getPassword(),
+                mapRolesToAuthorities(dbUser.getRoles()));
+        return u;
     }
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles){
-        return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
+        return roles.stream().map(role ->
+                new SimpleGrantedAuthority(
+                        role.getName())).collect(Collectors.toList());
     }
 }

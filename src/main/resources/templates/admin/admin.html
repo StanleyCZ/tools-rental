@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="cs"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{shared/layout-admin}"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <title>Administrace - Půjčovna nářadí</title>
+</head>
+<body>
+
+<ul layout:fragment="admin-nav">
+    <li class="nav-item"><a class="nav-link" href="#">Adminovský link</a></li>
+</ul>
+
+<h1 layout:fragment="content-heading">Vítejte v administraci</h1>
+
+<div layout:fragment="content">
+    <p th:each="authority : ${#authentication.getAuthorities()}"
+       th:text="${authority.getAuthority()}">
+    </p>
+</div>
+
+</body>
+
+</body>
+</html>
