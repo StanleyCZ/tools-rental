@@ -1,5 +1,6 @@
 package uhk.fim.toolsrental.controllers;
 
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,14 +25,14 @@ public class CategoryController {
         this.catService = cs;
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("admin/category/new")
     public String newCategory(Model model){
         Category category = new Category();
         model.addAttribute("category",category);
         return "admin/newCategory";
     }
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/admin/category/save")
     public String saveCategory(@Valid @ModelAttribute("category") Category category, BindingResult br){
 
@@ -43,7 +44,7 @@ public class CategoryController {
         Category savedCategory = catService.save(category);
         return "redirect:/admin/category/detail/" + savedCategory.getId();
     }
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/admin//category/detail/{id}")
     public String detail(@PathVariable(name = "id") long id, Model model){
 
@@ -56,7 +57,7 @@ public class CategoryController {
         return "admin/detailCategory";
     }
 
-    @PreAuthorize("hasAnyRole('ADMIN')")
+    @Secured("ADMIN")
     @GetMapping("admin/categories")
     public String listOfCategories(Model model){
         List<Category> categories = catService.getAllCategories();

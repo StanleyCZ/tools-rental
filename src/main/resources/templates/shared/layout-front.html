@@ -59,7 +59,7 @@
     <footer class="footer bg-white border-top">
         <div class="container text-center py-4">
             <p class="text-muted">Projekt PPRO 2020 &copy; Stanislav Máša, Michal Hvězda</p>
-            <a sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_EMPL')" th:href="@{/admin}">Administrace webu</a>
+            <a sec:authorize="hasAnyAuthority('ADMIN','EMPL')" th:href="@{/admin}">Administrace webu</a>
         </div>
     </footer>
 
