@@ -24,6 +24,16 @@ public class RegistrationDto {
     @NotBlank
     private String confirmPassword;
 
+    private String Role;
+
+    public String getRole() {
+        return Role;
+    }
+
+    public void setRole(String role) {
+        Role = role;
+    }
+
     public String getFirstName() {
         return firstName;
     }

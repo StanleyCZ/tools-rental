@@ -11,6 +11,9 @@ public class Role extends ContentBase {
     @NotBlank
     private String name;
     private String description;
+    private static String ADMIN ="ADMIN";
+    private static String ZAMESTNANEC ="EMPL";
+    private static String ZAKAZNIK ="USER";
 
     public Role(){
 
@@ -34,4 +37,17 @@ public class Role extends ContentBase {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public static String getADMIN() {
+        return ADMIN;
+    }
+
+    public static String getZAMESTNANEC() {
+        return ZAMESTNANEC;
+    }
+
+    public static String getZAKAZNIK() {
+        return ZAKAZNIK;
+    }
 }
+

@@ -35,7 +35,8 @@ public class RepositoryTests {
     private UserService userService;
 
 
-    /*@Test
+    // běda tomu co to odkomentuje a spustí !!!! ty ty ty !!!!
+   /* @Test
     public void insertRoles() {
         Role adminRole = new Role();
         adminRole.setName("ROLE_ADMIN");
@@ -47,6 +48,7 @@ public class RepositoryTests {
         emplRole.setName("ROLE_EMPL");
         roleRepo.save(emplRole);
     }*/
+
     /*@Test
     public void insertUsers(){
         RegistrationDto adminDto = new RegistrationDto();
@@ -54,6 +56,7 @@ public class RepositoryTests {
         adminDto.setLastName("Pašík");
         adminDto.setEmail("admin@email.cz");
         adminDto.setPassword("admin123");
+        adminDto.setRole(Role.getADMIN());
         userService.registerNewUser(adminDto);
 
         RegistrationDto emplDto = new RegistrationDto();
@@ -61,6 +64,7 @@ public class RepositoryTests {
         emplDto.setLastName("Vyhňoucal");
         emplDto.setEmail("empl@email.cz");
         emplDto.setPassword("empl123");
+        emplDto.setRole(Role.getZAMESTNANEC());
         userService.registerNewUser(emplDto);
 
         RegistrationDto userDto = new RegistrationDto();
@@ -68,6 +72,7 @@ public class RepositoryTests {
         userDto.setLastName("Vemtočert");
         userDto.setEmail("user@email.cz");
         userDto.setPassword("user123");
+        userDto.setRole(Role.getZAKAZNIK());
         userService.registerNewUser(userDto);
 
 

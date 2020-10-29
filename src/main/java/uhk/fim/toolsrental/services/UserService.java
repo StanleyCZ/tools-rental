@@ -37,7 +37,7 @@ public class UserService implements IUserService {
                 registrationDto.getLastName(),
                 registrationDto.getEmail(),
                 pwdEncoder.encode(registrationDto.getPassword()),
-                registrationDto.getPhoneNumber(), Arrays.asList(new Role("ROLE_USER")));
+                registrationDto.getPhoneNumber(), Arrays.asList(new Role(registrationDto.getRole())));
 
         return userRepo.save(user);
     }
