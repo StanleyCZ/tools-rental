@@ -25,14 +25,14 @@ public class CategoryController {
         this.catService = cs;
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+    //@PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("admin/category/new")
     public String newCategory(Model model){
         Category category = new Category();
         model.addAttribute("category",category);
         return "admin/newCategory";
     }
-    @PreAuthorize("hasAuthority('ADMIN')")
+    //@PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping("/admin/category/save")
     public String saveCategory(@Valid @ModelAttribute("category") Category category, BindingResult br){
 
@@ -44,7 +44,7 @@ public class CategoryController {
         Category savedCategory = catService.save(category);
         return "redirect:/admin/category/detail/" + savedCategory.getId();
     }
-    @PreAuthorize("hasAuthority('ADMIN')")
+    //@PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/admin//category/detail/{id}")
     public String detail(@PathVariable(name = "id") long id, Model model){
 
@@ -57,7 +57,7 @@ public class CategoryController {
         return "admin/detailCategory";
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+    //@PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("admin/categories")
     public String listOfCategories(Model model){
         List<Category> categories = catService.getAllCategories();

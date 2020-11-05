@@ -37,7 +37,7 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @PreAuthorize("hasAnyAuthority('ADMIN','EMPL')")
+    //@PreAuthorize("hasAnyAuthority('ADMIN','EMPL')")
     @GetMapping("/admin/products")
     public String adminProductList(Model model){
 
@@ -46,10 +46,11 @@ public class ProductController {
         return "admin/listProducts";
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+    //@PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("admin/product/new")
     public String newProductForm(Model model){
         Product product = new Product();
+        product.setCost(500.f);
         Map<Long,String> categorySelectList = catService.getAllCategories()
                 .stream()
                 .collect(Collectors.toMap(Category::getId,Category::getName));
@@ -57,26 +58,46 @@ public class ProductController {
         model.addAttribute("categories",categorySelectList);
         return "admin/newProduct";
     }
-    @PreAuthorize("hasAuthority('ADMIN')")
+    //@PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping("admin/product/save")
     public String saveProductForm(@Valid @ModelAttribute("product") Product product,
                                   BindingResult bres,
                                   @RequestParam("productImage") MultipartFile file) throws IOException {
-        if(bres.hasErrors())
+        /*if(bres.hasErrors())
             return "admin/newProduct";
+*/
+        //TODO setCategory aby to nebralo konstnti
+        product.setCategory(catService.getById(1L));
+        String filename = StringUtils.cleanPath(file.getOriginalFilename());
+        product.setPicture(filename);
+        Product savedProduct = productService.saveProduct(product);
+        String uploadDir = "./product-files/" + savedProduct.getId();
+        Path uploadPath = Paths.get(uploadDir);
+
+        if (!Files.exists(uploadPath)) {
+            Files.createDirectories(uploadPath);
+        }
+
+        try (InputStream inputStream = file.getInputStream()) {
+            Path filePath = uploadPath.resolve(filename);
+            Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+            throw new IOException("Nelze ulozit soubor: " + filename);
+        }
+
 
         /*
-        * TODO
-        * Uložit produkt (vytvořit metodu v ProductService)
-        * ** Nejspíš to bude chtít ještě vytáhnout z db zvolenou kategorii podle ID
-        * ** a přiřadit jí tomu produktu, než se uloží do db
-        * Pokud je nahraný obrázek, uložit ho do nějaké foldery
-        *
-        * */
+         * TODO
+         * Uložit produkt (vytvořit metodu v ProductService)
+         * ** Nejspíš to bude chtít ještě vytáhnout z db zvolenou kategorii podle ID
+         * ** a přiřadit jí tomu produktu, než se uloží do db
+         * Pokud je nahraný obrázek, uložit ho do nějaké foldery
+         *
+         * */
         //TODO vytvořit pohled detailProduct
-        return "redirect:/admin/product/detail/"; //TODO + id nově vytvořeného produktu
+        //return "redirect:/admin/product/detail/"; //TODO + id nově vytvořeného produktu
 
-
+        return "admin/newProduct";
     }
 
 }

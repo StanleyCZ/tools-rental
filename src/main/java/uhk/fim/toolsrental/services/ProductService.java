@@ -1,6 +1,8 @@
 package uhk.fim.toolsrental.services;
 
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
+import uhk.fim.toolsrental.models.Category;
 import uhk.fim.toolsrental.models.Product;
 import uhk.fim.toolsrental.repos.ProductRepository;
 
@@ -10,6 +12,7 @@ import java.util.List;
 public class ProductService {
 
     private final ProductRepository productRepo;
+    private CategoryService categoryService;
 
     public ProductService(ProductRepository productRepo){
         this.productRepo = productRepo;
@@ -21,8 +24,18 @@ public class ProductService {
 
 
     public Product saveProduct(Product p){
-        //TODO
-        return null;
+
+        Product product = new Product(
+                p.getName(),
+                p.getCost(),
+                p.getTotalAmount()
+        );
+        product.setPicture(p.getPicture());
+        product.setCategory(p.getCategory());
+        product.setDescription(p.getDescription());
+        //product.setFreeAmount(p.getTotalAmount());
+
+        return productRepo.save(product);
     }
 
 }

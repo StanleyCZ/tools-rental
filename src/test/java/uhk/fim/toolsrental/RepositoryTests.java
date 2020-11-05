@@ -49,7 +49,8 @@ public class RepositoryTests {
         roleRepo.save(emplRole);
     }*/
 
-    /*@Test
+    /*
+    @Test
     public void insertUsers(){
         RegistrationDto adminDto = new RegistrationDto();
         adminDto.setFirstName("Vašík");
@@ -76,6 +77,6 @@ public class RepositoryTests {
         userService.registerNewUser(userDto);
 
 
-    }*/
+    }//*/
 
 }

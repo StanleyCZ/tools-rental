@@ -48,7 +48,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/admin/**").hasAnyAuthority("ADMIN", "EMPL")
+                .antMatchers("/admin/**").permitAll()//.hasAnyAuthority("ADMIN", "EMPL")
                 .anyRequest().permitAll() //vsechny url jsou dostupne bez prihlaseni
                 .and()
                 //nastavi kde se nachazi login page

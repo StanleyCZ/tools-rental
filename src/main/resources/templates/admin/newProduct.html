@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{shared/layout-admin}"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" xmlns:form="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Nový produkt - Půjčovna nářadí</title>
@@ -24,7 +24,7 @@
 
         <div class="form-group row">
             <label th:for="${product.name}" class="col-sm-3">Název</label>
-            <input th:for="*{name}" class="col-sm-9 form-control" required />
+            <input th:field="*{name}" class="col-sm-9 form-control" required />
         </div>
         <div class="form-group row">
             <label class="col sm-3">Kód TODO</label>
@@ -32,11 +32,11 @@
         </div>
         <div class="form-group row">
             <label th:for="${product.cost}" class="col-sm-3">Cena (v KČ)</label>
-            <input th:for="*{cost}" type="number" min="0" class="col-sm-9 form-control" required />
+            <input th:field="*{cost}" type="number" min="0" class="col-sm-9 form-control" required />
         </div>
         <div class="form-group row">
             <label th:for="${product.totalAmount}" class="col-sm-3">Množství</label>
-            <input th:for="*{totalAmount}" type="number" min="1" step="1" class="col-sm-9 form-control" required />
+            <input th:field="*{totalAmount}" type="number" min="1" step="1" class="col-sm-9 form-control" required />
         </div>
         <div class="form-group row">
             <label th:for="${product.category}" class="col-sm-3">Kategorie</label>
