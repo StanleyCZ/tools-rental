@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="cs"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{shared/layout-admin}"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8">
+    <title>Nový produkt - Půjčovna nářadí</title>
+</head>
+<body>
+
+<ul class="navbar-nav" layout:fragment="admin-nav">
+    <li class="nav-item"><a class="nav-link" th:href="@{/admin/product/new}"><i class="fa fa-plus mr-2"></i>ZATÍM NIC</a></li>
+</ul>
+
+<h1 layout:fragment="content-heading">Nový produkt</h1>
+
+<div layout:fragment="content" class="mt-3">
+
+    <form th:action="@{/admin/product/save}" th:object="${product}" method="post" class="row" enctype="multipart/form-data">
+
+        <div class="col-6">
+
+        <div class="form-group row">
+            <label th:for="${product.name}" class="col-sm-3">Název</label>
+            <input th:for="*{name}" class="col-sm-9 form-control" required />
+        </div>
+        <div class="form-group row">
+            <label class="col sm-3">Kód TODO</label>
+            <input class="col-sm-9 form-control" />
+        </div>
+        <div class="form-group row">
+            <label th:for="${product.cost}" class="col-sm-3">Cena (v KČ)</label>
+            <input th:for="*{cost}" type="number" min="0" class="col-sm-9 form-control" required />
+        </div>
+        <div class="form-group row">
+            <label th:for="${product.totalAmount}" class="col-sm-3">Množství</label>
+            <input th:for="*{totalAmount}" type="number" min="1" step="1" class="col-sm-9 form-control" required />
+        </div>
+        <div class="form-group row">
+            <label th:for="${product.category}" class="col-sm-3">Kategorie</label>
+            <select th:for="*{category}" class="col-sm-9 form-control" required>
+                <option selected disabled>Vyberte kategorii</option>
+                <option th:each="c : ${categories}" th:value="${c.key}" th:text="${c.value}"></option>
+            </select>
+        </div>
+            <div class="form-group row">
+                <label th:for="${product.picture}" class="col-sm-3">Foto</label>
+                <div class="custom-file col-sm-9">
+                    <input type="file" name="productImage" class="custom-file-input" id="imgFileInput" accept="image/jpeg, image/png">
+                    <label class="custom-file-label">Vyberte soubor</label>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <p>Náhled obrázku</p>
+            <img id="thumbnail" class="img-fluid"/>
+        </div>
+        <div class="col-12">
+            <div class="">
+                <label th:for="${product.description}">Popis</label>
+                <div class="mb-3">
+                    <textarea id="editor"></textarea>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Uložit</button>
+
+        </div>
+
+
+    </form>
+
+
+
+</div>
+
+<th:block layout:fragment="scripts">
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({selector:'#editor'});
+    </script>
+</th:block>
+</body>
+</html>

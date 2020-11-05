@@ -2,23 +2,39 @@ package uhk.fim.toolsrental.models;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Product extends ContentBase {
+
+
+
     @NotBlank
+    private String name;
+
+    @NotNull
     private Float cost;
 
     private String picture;
     private String description;
 
-    @NotBlank
+    @NotNull
     private int totalAmount;
     private int freeAmount;
 
-    @NotBlank
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "idCategory",referencedColumnName = "id", nullable = false)
     private Category category;
+
+    public Product() {
+    }
+
+    public Product(@NotBlank String name, @NotBlank Float cost, @NotBlank int totalAmount) {
+        this.cost = cost;
+        this.totalAmount = totalAmount;
+        this.name = name;
+    }
 
     public Float getCost() {
         return cost;
@@ -67,12 +83,13 @@ public class Product extends ContentBase {
     public void setCategory(Category category) {
         this.category = category;
     }
-
-    public Product() {
+    public String getName() {
+        return name;
     }
 
-    public Product(@NotBlank String name, @NotBlank Float cost, @NotBlank int totalAmount) {
-        this.cost = cost;
-        this.totalAmount = totalAmount;
+    public void setName(String name) {
+        this.name = name;
     }
+
+
 }

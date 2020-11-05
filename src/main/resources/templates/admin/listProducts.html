@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="cs"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{shared/layout-admin}"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8">
+    <title>Seznam produktů - Půjčovna nářadí</title>
+</head>
+<body>
+
+<ul class="navbar-nav" layout:fragment="admin-nav">
+    <li class="nav-item"><a class="nav-link" th:href="@{/admin/product/new}"><i class="fa fa-plus mr-2"></i>Nový produkt</a></li>
+</ul>
+
+<h1 layout:fragment="content-heading">Seznam produktů</h1>
+
+<div layout:fragment="content">
+    <div class="card">
+        <div class="card-body">
+            <table class="table table-sm table-bordered">
+                <thead class="thead-light">
+                <tr>
+                    <th>Název produktu</th>
+                    <th>Kód produktu (TODO)</th>
+                    <th>Kategorie</th>
+                    <th>Cena</th>
+                    <th>Počet ks</th>
+                    <th>Zapůjčeno ks</th>
+                    <th>Akce</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="product: ${products}" role="row">
+                    <td class="align-middle" th:text="${product.name}">Jméno produktu</td>
+                    <td class="align-middle">TODO</td>
+                    <td class="align-middle">TODO</td>
+                    <td class="align-middle" th:text="${product.cost}">TODO</td>
+                    <td class="align-middle" th:text="${product.totalAmount}">TODO</td>
+                    <td class="align-middle" th:text="${product.totalAmount - product.freeAmount}">TODO</td>
+                    <td>
+                        <a th:href="@{'/admin/product/detail/' + ${product.id}}" class="btn btn-primary">Detail</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>
