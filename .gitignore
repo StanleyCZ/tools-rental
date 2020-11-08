@@ -1,6 +1,7 @@
 HELP.md
 target/
-**/product-files/
+!product-files/
+product-files*
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
