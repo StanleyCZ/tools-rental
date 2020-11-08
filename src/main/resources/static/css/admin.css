@@ -1,3 +1,7 @@
 .bg-c-dark{
     background-color: #25272c;
 }
+/* Hide TinyMCE alert */
+.tox{
+    display: none;
+}

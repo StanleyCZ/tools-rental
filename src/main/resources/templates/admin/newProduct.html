@@ -22,46 +22,64 @@
 
         <div class="col-6">
 
-        <div class="form-group row">
+        <div class="form-group row mb-2">
             <label th:for="${product.name}" class="col-sm-3">Název</label>
-            <input th:field="*{name}" class="col-sm-9 form-control" required />
+            <div class="col-sm-9">
+                <input th:field="*{name}" class="form-control form-control-sm" placeholder="Zadejte název produktu" required />
+                <p th:each="error: ${#fields.errors('name')}" th:text="${error}" class="text-danger small">Validation error</p>
+            </div>
         </div>
-        <div class="form-group row">
-            <label class="col sm-3">Kód TODO</label>
-            <input class="col-sm-9 form-control" />
+        <div class="form-group row mb-2">
+            <label th:for="${product.price}" class="col-sm-3">Cena</label>
+            <div class="col-sm-9">
+                <input th:field="*{price}" type="number" min="0" class="form-control form-control-sm" required placeholder="Cena v Kč"/>
+                <p th:each="error: ${#fields.errors('price')}" th:text="${error}" class="text-danger small">Validation error</p>
+            </div>
         </div>
-        <div class="form-group row">
-            <label th:for="${product.cost}" class="col-sm-3">Cena (v KČ)</label>
-            <input th:field="*{cost}" type="number" min="0" class="col-sm-9 form-control" required />
+        <div class="form-group row mb-2">
+            <label th:for="${product.depositPrice}" class="col-sm-3">Záloha</label>
+            <div class="col-sm-9">
+                <input th:field="*{depositPrice}" type="number" min="0" class="form-control form-control-sm" required placeholder="Záloha v Kč"/>
+                <p th:each="error: ${#fields.errors('depositPrice')}" th:text="${error}" class="text-danger small">Validation error</p>
+            </div>
         </div>
-        <div class="form-group row">
+        <div class="form-group row mb-2">
             <label th:for="${product.totalAmount}" class="col-sm-3">Množství</label>
-            <input th:field="*{totalAmount}" type="number" min="1" step="1" class="col-sm-9 form-control" required />
+            <div class="col-sm-9">
+                <input th:field="*{totalAmount}" th:min="1" th:type="number" th:step="1" class="form-control form-control-sm" required  placeholder="Zadejte množství"/>
+                <p th:each="error: ${#fields.errors('totalAmount')}" th:text="${error}" class="text-danger small">Validation error</p>
+            </div>
         </div>
-        <div class="form-group row">
+        <div class="form-group row mb-2">
             <label th:for="${product.category}" class="col-sm-3">Kategorie</label>
-            <select th:for="*{category}" class="col-sm-9 form-control" required>
-                <option selected disabled>Vyberte kategorii</option>
-                <option th:each="c : ${categories}" th:value="${c.key}" th:text="${c.value}"></option>
-            </select>
+            <div class="col-sm-9">
+                <select name="category" id="category" class="form-control form-control-sm" required>
+                    <option value="" th:selected="selected" th:disabled="disabled">Vyberte kategorii</option>
+                    <option th:each="c : ${categories}" th:value="${c.key}" th:text="${c.value}"></option>
+                </select>
+            </div>
+            <p th:each="error: ${#fields.errors('category')}" th:text="${error}" class="text-danger small">Validation error</p>
+
         </div>
-            <div class="form-group row">
-                <label th:for="${product.picture}" class="col-sm-3">Foto</label>
-                <div class="custom-file col-sm-9">
-                    <input type="file" name="productImage" class="custom-file-input" id="imgFileInput" accept="image/jpeg, image/png">
-                    <label class="custom-file-label">Vyberte soubor</label>
+            <div class="form-group row mb-2">
+                <label class="col-sm-3">Foto</label>
+                <div class="col-sm-9">
+                    <div class="custom-file">
+                        <input type="file" name="productImage" class="custom-file-input" id="imgFileInput" accept="image/jpeg, image/png">
+                        <label class="custom-file-label">Vyberte soubor</label>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-6">
+        <div class="col-6 text-center">
             <p>Náhled obrázku</p>
-            <img id="thumbnail" class="img-fluid"/>
+            <img id="thumbnail" style="max-height: 200px; width: auto;"/>
         </div>
         <div class="col-12">
             <div class="">
                 <label th:for="${product.description}">Popis</label>
                 <div class="mb-3">
-                    <textarea id="editor"></textarea>
+                    <textarea id="editor" th:field="*{description}"></textarea>
                 </div>
             </div>
             <button type="submit" class="btn btn-primary">Uložit</button>

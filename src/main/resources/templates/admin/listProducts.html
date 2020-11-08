@@ -22,25 +22,26 @@
             <table class="table table-sm table-bordered">
                 <thead class="thead-light">
                 <tr>
-                    <th>Název produktu</th>
-                    <th>Kód produktu (TODO)</th>
+                    <th>Název</th>
+                    <th>Kód</th>
                     <th>Kategorie</th>
                     <th>Cena</th>
                     <th>Počet ks</th>
-                    <th>Zapůjčeno ks</th>
                     <th>Akce</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="product: ${products}" role="row">
-                    <td class="align-middle" th:text="${product.name}">Jméno produktu</td>
-                    <td class="align-middle">TODO</td>
-                    <td class="align-middle">TODO</td>
-                    <td class="align-middle" th:text="${product.cost}">TODO</td>
+                    <td class="align-middle">
+                        <a th:href="@{/admin/product/{id}(id=${product.id})}" th:text="${product.name}">Odkaz na produkt</a></td>
+                    <td class="align-middle" th:text="${product.code}">Kód</td>
+                    <td class="align-middle" th:text="${product.category.name}">TODO</td>
+                    <td class="align-middle" th:text="${product.price}">TODO</td>
                     <td class="align-middle" th:text="${product.totalAmount}">TODO</td>
-                    <td class="align-middle" th:text="${product.totalAmount - product.freeAmount}">TODO</td>
                     <td>
-                        <a th:href="@{'/admin/product/detail/' + ${product.id}}" class="btn btn-primary">Detail</a>
+                        <a th:href="@{'/admin/product/' + ${product.id}}" class="btn-sm btn-primary btn-circle text-decoration-none">
+                            <i class="fa fa-edit"></i>
+                        </a>
                     </td>
                 </tr>
                 </tbody>

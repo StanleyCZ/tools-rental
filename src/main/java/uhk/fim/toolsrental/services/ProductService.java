@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import uhk.fim.toolsrental.models.Category;
 import uhk.fim.toolsrental.models.Product;
 import uhk.fim.toolsrental.repos.ProductRepository;
+import uhk.fim.toolsrental.utils.AppHelper;
 
 import java.util.List;
 
@@ -22,20 +23,18 @@ public class ProductService {
         return productRepo.findAll();
     }
 
+    public Product getById(Long id){return  productRepo.getOne(id);}
 
     public Product saveProduct(Product p){
 
-        Product product = new Product(
-                p.getName(),
-                p.getCost(),
-                p.getTotalAmount()
-        );
-        product.setPicture(p.getPicture());
-        product.setCategory(p.getCategory());
-        product.setDescription(p.getDescription());
-        //product.setFreeAmount(p.getTotalAmount());
-
-        return productRepo.save(product);
+        //pokud produkt neexistuje v db
+        if(p.getId() == null){
+            //nastav product code
+            p.setCode(AppHelper.generateProductCode());
+            //nastav dostupne mnozstvi stejne jako je celkovy pocet produktu
+            p.setFreeAmount(p.getTotalAmount());
+        }
+        return  productRepo.save(p);
     }
 
 }

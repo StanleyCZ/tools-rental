@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="cs"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{shared/layout-admin}"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" xmlns:form="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Detail produktu - Půjčovna nářadí</title>
+</head>
+<body>
+
+<ul class="navbar-nav" layout:fragment="admin-nav">
+    <li class="nav-item"><a class="nav-link" th:href="@{/admin/product/new}"><i class="fa fa-plus mr-2"></i>ZATÍM NIC</a></li>
+</ul>
+
+<h1 layout:fragment="content-heading">Detail produktu: <span class="text-primary font-weight-bold" th:text="${product.name}"></span> </h1>
+
+
+<div layout:fragment="content" class="mt-3">
+
+    <!-- Dulezite informace -->
+    <div class="row mb-3">
+        <div class="col">
+            <div class="card border-left-secondary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-secondary">KÓD PRODUKTU</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${product.code}"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary">CELKEM KS</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${product.totalAmount}"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success">DOSTUPNÝCH KS</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${product.freeAmount}"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-info">CENA</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="|${product.price} Kč|"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-info">ZÁLOHA</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="|${product.depositPrice} Kč|"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Form -->
+    <div class="row mb-3">
+        <form th:action="@{/admin/product/save}" th:object="${product}" method="post" class="col" enctype="multipart/form-data">
+
+            <input th:field="*{id}" type="hidden">
+            <input th:field="*{code}" type="hidden" />
+            <input th:field="*{freeAmount}" type="hidden" />
+            <input th:field="*{totalAmount}" type="hidden" />
+            <input th:field="*{createdDate}" type="hidden" />
+
+            <div class="card shadow border-left-primary">
+                <a href="#infoCollapseWrapper" class="d-block card-header py-3" data-toggle="collapse" role="button">
+                    <h6 class="font-weight-bold text-primary m-0">Informace o produktu</h6>
+                </a>
+
+                <div class="collapse" id="infoCollapseWrapper">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-9">
+                                <div class="form-group row mb-2">
+                                    <label class="col-sm-3">Název</label>
+                                    <div class="col-sm-9">
+                                        <input th:field="*{name}" class="form-control form-control-sm" required/>
+                                        <p th:each="error: ${#fields.errors('name')}" th:text="${error}" class="text-danger small"></p>
+                                    </div>
+                                </div>
+                                <div class="form-group row mb-2">
+                                    <label class="col-sm-3">Cena</label>
+                                    <div class="col-sm-9">
+                                        <input th:field="*{price}" type="number" min="0" class="form-control form-control-sm" required/>
+                                        <p th:each="error: ${#fields.errors('price')}" th:text="${error}" class="text-danger small"></p>
+                                    </div>
+                                </div>
+                                <div class="form-group row mb-2">
+                                    <label class="col-sm-3">Záloha</label>
+                                    <div class="col-sm-9">
+                                        <input th:field="*{depositPrice}" type="number" min="0"  class="form-control form-control-sm" required/>
+                                        <p th:each="error: ${#fields.errors('depositPrice')}" th:text="${error}" class="text-danger small"></p>
+                                    </div>
+                                </div>
+                                <div class="form-group row mb-2">
+                                    <label th:for="${product.category}" class="col-sm-3">Kategorie</label>
+                                    <div class="col-sm-9">
+                                        <select name="category" id="category" class="form-control form-control-sm" required>
+                                            <option value="" th:selected="selected" th:disabled="disabled">Vyberte kategorii</option>
+                                            <option th:each="c : ${categories}" th:value="${c.key}" th:text="${c.value}" th:selected="${product.category.id == c.key}"></option>
+                                        </select>
+                                    </div>
+                                    <p th:each="error: ${#fields.errors('category')}" th:text="${error}" class="text-danger small">Validation error</p>
+                                </div>
+                            </div>
+                            <div class="col-3 text-center">
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-save mr-2"></i>Uložit změny</button>
+                            </div>
+                            <div class="col-12">
+                                <hr />
+                                <div class="form-group row">
+                                    <label class="col-sm-2">Popis</label>
+                                    <div class="col-sm-10">
+                                        <textarea id="editor" th:field="*{description}"></textarea>
+                                    </div>
+                                </div>
+                                <hr />
+                                <div class="form-group row">
+                                    <label class="col-sm-2">Obrázek</label>
+                                    <div class="col-sm-10">
+                                        <div class="custom-file">
+                                            <input type="file" name="productImage" class="custom-file-input" id="imgFileInput" accept="image/jpeg, image/png">
+                                            <label class="custom-file-label">Vyberte soubor</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </div>
+
+    <!-- Seznam vypujcek produktu -->
+    <div class="row mb-3">
+        <div class="col">
+            <div class="card border-left-success">
+                <a href="#borrows" class="card-header py-3" role="button" data-toggle="collapse">
+                    <h6 class="text-success font-weight-bold m-0">Výpůjčky s tímto produktem TODO (nebo vůbec neřešit)</h6>
+                </a>
+                <div class="collapse" id="borrows">
+                    <div class="card-body">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+<th:block layout:fragment="scripts">
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({selector:'#editor'});
+    </script>
+</th:block>
+</body>
+</html>
